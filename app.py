@@ -18,7 +18,7 @@ prompt = st.text_input("Enter a prompt:", placeholder="Looking for React intern 
 def get_dummy_embedding(text):
     # Fake embedding to match with dummy CVs
     np.random.seed(abs(hash(text)) % 10000)
-    return np.random.rand(384)
+    return np.random.rand(5)
 
 # Match logic
 if st.button("🔍 Match Resumes") and prompt:
