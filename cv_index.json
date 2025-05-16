@@ -2,7 +2,10 @@
   {
     "file_name": "Rahul_Ojha.pdf",
     "file_id": "12ab3cd45e6f",
+    "name": "Rahul Ojha",
+    "location": "Mumbai",
+    "email": "rahul@example.com",
     "embedding": [0.1, 0.2, 0.3, 0.4, 0.5],
-    "sample": "Skilled in React and Canva. Based in Mumbai."
+    "sample": "Skilled in React and Canva."
   }
 ]
