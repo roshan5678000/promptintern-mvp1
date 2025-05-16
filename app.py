@@ -13,7 +13,7 @@ with open("cv_index.json", "r") as f:
 # Input prompt
 prompt = st.text_input("🧠 Describe your intern requirement:", placeholder="e.g. Remote Canva intern in Mumbai")
 
-# Dummy prompt vector (same size as sample embedding)
+# Dummy prompt vector (match size of your embeddings)
 def get_dummy_embedding(text):
     np.random.seed(abs(hash(text)) % 10000)
     return np.random.rand(len(data[0]["embedding"]))
@@ -27,17 +27,15 @@ if st.button("🔍 Match Resumes") and prompt:
     for item in data:
         vec = np.array(item["embedding"])
         score = cosine_similarity([query_vector], [vec])[0][0]
-        matches.append((item["file_name"], item["file_id"], item["sample"], score))
+        matches.append((item["file_name"], item.get("file_id", ""), item.get("sample", ""), score))
 
     matches.sort(key=lambda x: x[3], reverse=True)
 
     for name, file_id, sample, score in matches[:5]:
-        drive_link = f"https://drive.google.com/file/d/{file_id}/view"
         st.markdown(f"""
         **📄 {name}**  
-        💬 _"{sample}"_  
-        🔢 Match: **{round(score * 100, 2)}%**  
-        [👁 View CV]({drive_link})  
+        💬 _{sample}_  
+        🔢 Match Score: **{round(score * 100, 2)}%**  
+        {"[👁 View CV](https://drive.google.com/file/d/" + file_id + "/view)" if file_id else "🚫 No link available"}
         ---
         """)
-
